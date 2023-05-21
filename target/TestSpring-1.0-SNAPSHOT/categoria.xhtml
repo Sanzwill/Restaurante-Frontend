@@ -1,0 +1,75 @@
+
+
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <style>
+        p {
+            line-height: 1.5;
+            margin: 0;
+        }
+    </style>
+
+    <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+        <h:head>
+            <p:card style=" display: flex; align-items: center; justify-content: center; background-color: #48cae4 ">
+                <f:facet name="title">
+                    Seleciona el tipo de Reserva del menu
+                     <p:button icon="pi pi-home" styleClass="rounded-button ui-button-secondary ui-button-outlined" id="btnguardar" value="HOME" href="index.xhtml" />
+                </f:facet>
+            </p:card>
+        </h:head>
+        <h:body style="background-color: #ade8f4">
+            <h:form > 
+                <p:card style="background-color: #ade8f4" >
+                <h:panelGrid id="grid" cellpadding="7" columns="2">
+                    <p:outputLabel for="nombre" value="Selecion de menu"/>
+                    <p:selectOneMenu id="nombre" value="#{categoriaController.nombre}">
+                        <f:selectItem itemLabel="Desayuno" itemValue="Desayuno" />
+                        <f:selectItem itemLabel="Almuerzo" itemValue="Almuerzo" />
+                        <f:selectItem itemLabel="Merienda" itemValue="Merienda" />
+                    </p:selectOneMenu>
+                    
+                </h:panelGrid>
+                <p:commandButton  icon="pi pi-bookmark" value="Guardar" action="#{categoriaController.guardaCategoria}" process="@form" />
+                </p:card>
+            </h:form>
+            <h:form>
+                <p:growl id="growl" showDetail="true" />
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="CONSULTAR" icon="pi pi-search" actionListener="#{categoriaController.callApi}" process="@form" update="tblFactura, growl" styleClass="mr-2"/>                        
+                        <p:commandButton value="LIMPIAR" icon="pi pi-minus" actionListener="#{categoriaController.limpiar}" process="@form" update="tblFactura, growl" styleClass="ui-button-danger"/> 
+                    </p:toolbarGroup>
+                </p:toolbar>                
+                <div class="card">
+                    <p:dataTable id="tblFactura" var="factura" value="#{categoriaController.lstcatego}" >
+                        <p:column headerText="ID">
+                            <h:outputText value="#{factura.idCategoria}" />
+                        </p:column>
+
+                        <p:column headerText="Nombre" sortBy="#{factura.nombre}">
+                            <h:outputText value="#{factura.nombre}" />
+                        </p:column>
+
+                        
+
+                        <p:column headerText="Actions">
+                            <p:commandButton value="Eliminar" actionListener="#{categoriaController.borraApiCategoria(factura.idCategoria)}" process="@form" update="tblFactura" />
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </h:form>
+        </h:body>
+    </f:view>
+
+</html>
+
+

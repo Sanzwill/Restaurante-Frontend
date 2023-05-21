@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <style>
+        p {
+            line-height: 1.5;
+            margin: 0;
+        }
+    </style>
+
+    <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+        <h:head>
+        </h:head>
+        <h:body>
+            <h:form>
+                <p:growl id="growl" showDetail="true" />
+                <p:card>
+                    <f:facet name="title">
+                       Reporte
+                    </f:facet>
+                </p:card>
+               
+                <h1>Datos del reporte </h1>
+                <div class="card">
+                    <p:dataTable id="tblClientes" var="empleado" value="#{reporteController.lstrepor}" >
+                        <p:column headerText="ID">
+                            <h:outputText value="#{empleado.id_reporte}" />
+                        </p:column>
+
+                        <p:column headerText="NOMBRE">
+                            <h:outputText value="#{empleado.id_factura}" />
+                        </p:column>
+
+                        <p:column headerText="APELLIDO">
+                            <h:outputText value="#{empleado.id_cliente}" />
+                        </p:column>
+                        <p:column headerText="TELÉFONO">
+                            <h:outputText value="#{empleado.id_mesa}" />
+                        </p:column>
+                        <p:column headerText="SALARIO">
+                            <h:outputText value="#{empleado.fecha_factura}" />
+                        </p:column>
+                        <p:column headerText="SALARIO">
+                            <h:outputText value="#{empleado.nombre}" />
+                        </p:column>
+                        <p:column headerText="SALARIO">
+                            <h:outputText value="#{empleado.total}" />
+                        </p:column>
+                       
+                        <p:column headerText="Actions">
+                            <p:commandButton value="Eliminar" actionListener="#{reporteController.eliminar(Reporte.id_reporte)}" process="@form" update="tblClientes" />
+                        </p:column>
+                    </p:dataTable>
+                
+                </div>
+
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="CONSULTAR" icon="pi pi-search" actionListener="#{reporteController.callApi}" process="@form" update="tblClientes, growl" styleClass="mr-2"/>                        
+                        <p:commandButton value="LIMPIAR" icon="pi pi-minus" actionListener="#{reporteController.limpiar}" process="@form" update="tblClientes, growl" styleClass="ui-button-danger"/> 
+                           <p:commandButton value="Generar PDF" action="#{reporteController.generarPDF}" ajax="false" process="@form" styleClass="ui-button-primary" />
+                    </p:toolbarGroup>
+                </p:toolbar>    
+            </h:form>
+        </h:body>
+    </f:view>
+
+</html> 

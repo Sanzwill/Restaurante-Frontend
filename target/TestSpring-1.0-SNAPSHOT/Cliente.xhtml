@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <style>
+        p {
+            line-height: 1.5;
+            margin: 0;
+        }
+    </style>
+
+    <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+        <h:head>
+        </h:head>
+        <h:body>
+            <h:form>
+                <p:growl id="growl" showDetail="true" />
+                <p:card>
+                    <f:facet name="title">
+                        Clientes
+                    </f:facet>
+                </p:card>
+                <h1>Registro de clientes</h1>
+                <h:panelGrid id="grid" columns="4" >
+                    <p:outputLabel for="nombres" value="NOMBRE COMPLETO" />
+                    <p:inputText id="nombres" value="#{clienteController.nombres}"/>
+                    <p:outputLabel for="telefono" value="TELÉFONO" />
+                    <p:inputText id="telefono" value="#{clienteController.telefono}"/>
+                    </h:panelGrid>
+                <p:commandButton value="Guardar Cliente" action="#{clienteController.guardarCliente}" process="@form" update="tblClientes, growl"/>
+
+                <h1>Datos de los clientes</h1>
+                <div class="card" >
+                    <p:dataTable id="tblClientes" var="cliente" value="#{clienteController.lstLista}" >
+                        <p:column headerText="ID">
+                            <h:outputText value="#{cliente.id_cliente}" />
+                        </p:column>
+
+                        <p:column headerText="NOMBRE">
+                            <h:outputText value="#{cliente.nombre}" />
+                        </p:column>
+
+              
+                        <p:column headerText="TELEFONO">
+                            <h:outputText value="#{cliente.telefono}" />
+                        </p:column>
+                       
+                        <p:column headerText="Actions">
+                            <p:commandButton value="Eliminar" actionListener="#{clienteController.eliminarCliente(cliente.id_cliente)}" process="@form" update="tblClientes" />
+                        <p:commandButton value="Actualizar" actionListener="#{clienteController.actualizarCliente(cliente)}" process="@form" update="tblClientes" />
+</p:column>
+                    </p:dataTable>
+                </div>
+
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="CONSULTAR" icon="pi pi-search" actionListener="#{clienteController.callApi}" process="@form" update="tblClientes, growl" styleClass="mr-2"/>                        
+                      
+                        <p:commandButton value="LIMPIAR" icon="pi pi-minus" actionListener="#{clienteController.limpiar}" process="@form" update="tblClientes, growl" styleClass="ui-button-danger"/> 
+                      
+  
+
+                    
+                    </p:toolbarGroup>
+                </p:toolbar>    
+            </h:form>
+            <h:form>
+
+
+            </h:form>
+        </h:body>
+    </f:view>
+
+</html>

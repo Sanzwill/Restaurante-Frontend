@@ -1,0 +1,5 @@
+com\test\spring\JakartaRestConfiguration.class
+com\test\spring\service\SpringRestConsumer.class
+com\test\spring\controller\ServidorController.class
+com\test\spring\pojo\TServidor.class
+com\test\spring\resources\JakartaEE91Resource.class
