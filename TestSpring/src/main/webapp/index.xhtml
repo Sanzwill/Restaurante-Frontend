@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <style>
+        p {
+            line-height: 1.5;
+            margin: 0;
+        }
+    </style>
+
+    <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+        <h:head>
+
+        </h:head>
+        <h:body>
+            <h:form>
+                <p:growl id="growl" showDetail="true" />
+                <p:card style="width: 25rem; margin-bottom: 2em">
+                    <f:facet name="title">
+                        Lista de Objetos de Servidores
+                    </f:facet>
+                </p:card>
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="CONSULTAR" icon="pi pi-search" actionListener="#{servidorController.callApi}" process="@form" update="tblServidores, growl" styleClass="mr-2"/>                        
+                        <p:commandButton value="LIMPIAR" icon="pi pi-minus" actionListener="#{servidorController.limpiar}" process="@form" update="tblServidores, growl" styleClass="ui-button-danger"/> 
+                    </p:toolbarGroup>
+                </p:toolbar>                
+                <div class="card">
+                    <p:dataTable id="tblServidores" var="servidor" value="#{servidorController.lstServidores}" >
+                        <p:column headerText="ID">
+                            <h:outputText value="#{servidor.idServidor}" />
+                        </p:column>
+
+                        <p:column headerText="NOMBRE" sortBy="#{servidor.nombre}" filterBy="#{servidor.nombre}" filterMatchMode="contains">
+                            <h:outputText value="#{servidor.nombre}" />
+                        </p:column>
+
+                        <p:column headerText="IP" sortBy="#{servidor.ip}" filterBy="#{servidor.ip}" filterMatchMode="contains">
+                            <h:outputText value="#{servidor.ip}" />
+                        </p:column>
+
+                        <p:column headerText="TIPO SERVIDOR">
+                            <h:outputText value="#{servidor.tipoServidor}" />
+                        </p:column>
+                        <p:column headerText="PUERTO">
+                            <h:outputText value="#{servidor.puerto}" />
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </h:form>
+        </h:body>
+    </f:view>
+
+</html>

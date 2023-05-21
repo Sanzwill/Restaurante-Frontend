@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <style>
+        p {
+            line-height: 1.5;
+            margin: 0;
+        }
+    </style>
+
+    <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
+        <h:head>
+        </h:head>
+        <h:body>
+            <h:form>
+                <p:growl id="growl" showDetail="true" />
+                <p:card>
+                    <f:facet name="title">
+                       Logo Restaurante
+                    </f:facet>
+                </p:card>
+                <h1>Registro del Restaurante </h1>
+                <h:panelGrid id="grid" columns="4" >
+                    <p:outputLabel for="nombres" value="NOMBRE COMPLETO" />
+                    <p:inputText id="nombres" value="#{restauController.nombre}"/>
+                    <p:outputLabel for="telefono" value="TELÉFONO" />
+                    <p:inputText id="telefono" value="#{restauController.telefono}"/>
+                    <p:outputLabel for="direccion" value="Direccion" />
+                    <p:inputText id="direccion" value="#{restauController.direccion}"/>
+                    </h:panelGrid>
+                <p:commandButton value="Guardar Cliente" action="#{restauController.guardarrestaurante}" process="@form" update="tblClientes, growl"/>
+
+                <h1>Datos del Restaurante</h1>
+                <div class="card" >
+                    <p:dataTable id="tblClientes" var="cliente" value="#{restauController.lstrestau}" >
+                        <p:column headerText="ID">
+                            <h:outputText value="#{cliente.id_restaurante}" />
+                        </p:column>
+
+                        <p:column headerText="NOMBRE">
+                            <h:outputText value="#{cliente.nombre}" />
+                        </p:column>
+
+              
+                        <p:column headerText="TELEFONO">
+                            <h:outputText value="#{cliente.telefono}" />
+                        </p:column>
+                        <p:column headerText="Direccion">
+                            <h:outputText value="#{cliente.direccion}" />
+                        </p:column>
+                       
+                        <p:column headerText="Actions">
+                            <p:commandButton value="Eliminar" actionListener="#{restauController.eliminarrestaurante(Restaurante.id_restaurante)}" process="@form" update="tblClientes" />
+                        </p:column>
+                    </p:dataTable>
+                </div>
+
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="CONSULTAR" icon="pi pi-search" actionListener="#{restauController.callApi}" process="@form" update="tblClientes, growl" styleClass="mr-2"/>                        
+                        <p:commandButton value="LIMPIAR" icon="pi pi-minus" actionListener="#{restauController.limpiar}" process="@form" update="tblClientes, growl" styleClass="ui-button-danger"/> 
+                    </p:toolbarGroup>
+                </p:toolbar>    
+            </h:form>
+            <h:form>
+
+
+            </h:form>
+        </h:body>
+    </f:view>
+
+</html>
