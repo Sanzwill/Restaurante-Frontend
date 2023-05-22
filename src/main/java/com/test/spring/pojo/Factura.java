@@ -5,6 +5,7 @@
 package com.test.spring.pojo;
 
 import com.test.spring.service.SpringRestConsumer;
+import java.util.Date;
 import java.util.List;
 
 
@@ -12,27 +13,14 @@ public class Factura {
 
     
     private Long id_factura;
-    private Long id_cliente;
-    
-    private String num_mesa;
-    private String metodo_pago;
+    private Date fecha_factura;
     private String total;
-    private String fecha_transacion;
 
-    public Factura() {
-    }
-
-    public Factura(String num_mesa, String metodo_pago, String total, String fecha_transacion) {
-  
-        this.num_mesa = num_mesa;
-        this.metodo_pago = metodo_pago;
+    public Factura(Date fecha_factura, String total) {
+        this.fecha_factura = fecha_factura;
         this.total = total;
-        this.fecha_transacion = fecha_transacion;
     }
 
-  
-
- 
     public Long getId_factura() {
         return id_factura;
     }
@@ -41,28 +29,12 @@ public class Factura {
         this.id_factura = id_factura;
     }
 
-    public Long getId_cliente() {
-        return id_cliente;
+    public Date getFecha_factura() {
+        return fecha_factura;
     }
 
-    public void setId_cliente(Long id_cliente) {
-        this.id_cliente = id_cliente;
-    }
-
-    public String getNum_mesa() {
-        return num_mesa;
-    }
-
-    public void setNum_mesa(String num_mesa) {
-        this.num_mesa = num_mesa;
-    }
-
-    public String getMetodo_pago() {
-        return metodo_pago;
-    }
-
-    public void setMetodo_pago(String metodo_pago) {
-        this.metodo_pago = metodo_pago;
+    public void setFecha_factura(Date fecha_factura) {
+        this.fecha_factura = fecha_factura;
     }
 
     public String getTotal() {
@@ -72,14 +44,8 @@ public class Factura {
     public void setTotal(String total) {
         this.total = total;
     }
-
-    public String getFecha_transacion() {
-        return fecha_transacion;
-    }
-
-    public void setFecha_transacion(String fecha_transacion) {
-        this.fecha_transacion = fecha_transacion;
-    }
+    
+    
 
    
   

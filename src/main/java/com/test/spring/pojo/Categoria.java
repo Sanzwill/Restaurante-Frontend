@@ -26,9 +26,6 @@ public class Categoria {
         this.id_categoria = id_categoria;
     }
 
-  
-
-
     public String getNombre() {
         return nombre;
     }
@@ -37,4 +34,11 @@ public class Categoria {
         this.nombre = nombre;
     }
 
+   
+
+  
+
+
+
+   
 }

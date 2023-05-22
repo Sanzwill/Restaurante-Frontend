@@ -14,6 +14,7 @@ import com.test.spring.pojo.Orden;
 import com.test.spring.pojo.Plato;
 import com.test.spring.pojo.Reporte;
 import com.test.spring.pojo.Restaurante;
+import com.test.spring.pojo.reservacion;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -89,8 +90,8 @@ public class SpringRestConsumer {
             throw new RuntimeException("Error al guardar el cliente en la API: " + response.getStatusCodeValue());
         }
     }
-    public void actualizaApiCliente(Cliente cliente) {
-    String url = "http://localhost:8871/clientes/" + cliente.getId_cliente();
+    public void actualizaApiCliente(Cliente cliente, long param) {
+    String url = "http://localhost:8871/clientes/" + param;
     restTemplate.put(url, cliente);
 }
 
@@ -143,7 +144,7 @@ public class SpringRestConsumer {
     }
 
     public void borrarestaurante(int id) {
-        String url = "http://localhost:8871/restaurantes/";
+        String url = "http://localhost:8871/restaurante/";
         restTemplate.delete(url + id);
     }
 
@@ -182,8 +183,8 @@ public class SpringRestConsumer {
     }
 
     public void borraOrden(int id) {
-        String url = "http://localhost:8871/ordenes/";
-        restTemplate.delete(url + id);
+        String url = "http://localhost:8871/ordenes/ordenes/"+id;
+        restTemplate.delete(url);
     }
 
     public void guardarorden(Orden orden) {
@@ -224,6 +225,24 @@ public class SpringRestConsumer {
         String url = "http://localhost:8871/Reporte/";
         restTemplate.delete(url + id);
     }
-
+//Reserva 
     
+    public List<reservacion> consumereserva() {
+        String url = "http://localhost:8871/reserva/";
+        List<reservacion> deta = restTemplate.getForObject(url, List.class);
+        return deta;
+    }
+
+    public void borrarreserva(int id) {
+        String url = "http://localhost:8871/reserva/";
+        restTemplate.delete(url + id);
+    }
+
+    public void guardarreserva(reservacion rese) {
+        String url = "http://localhost:8871/reserva/reser";
+        ResponseEntity<reservacion> response = restTemplate.postForEntity(url, rese, reservacion.class);
+        if (response.getStatusCode() != HttpStatus.OK) {
+            throw new RuntimeException("Error al guardar el cliente en la API: " + response.getStatusCodeValue());
+        }
+    }
 }

@@ -10,12 +10,15 @@ package com.test.spring.pojo;
  */
 public class Mesa {
     private Integer id_mesa;
+    private String 	numero_mesa;
     private String capacidad;
-    private Integer  id_restaurante;
 
-    public Mesa(String capacidad) {
+    public Mesa(String numero_mesa, String capacidad) {
+        this.numero_mesa = numero_mesa;
         this.capacidad = capacidad;
     }
+
+ 
 
     public Integer getId_mesa() {
         return id_mesa;
@@ -33,13 +36,15 @@ public class Mesa {
         this.capacidad = capacidad;
     }
 
-    public Integer getId_restaurante() {
-        return id_restaurante;
+    public String getNumero_mesa() {
+        return numero_mesa;
     }
 
-    public void setId_restaurante(Integer id_restaurante) {
-        this.id_restaurante = id_restaurante;
+    public void setNumero_mesa(String numero_mesa) {
+        this.numero_mesa = numero_mesa;
     }
+
+  
     
     
 }

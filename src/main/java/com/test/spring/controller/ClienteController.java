@@ -23,8 +23,17 @@ public class ClienteController implements Serializable{
     private Integer id_cliente;
     private String nombres;
     private String telefono;
+    private String Apellido;
 
     public ClienteController() {
+    }
+
+    public String getApellido() {
+        return Apellido;
+    }
+
+    public void setApellido(String Apellido) {
+        this.Apellido = Apellido;
     }
 
     public List<Cliente> getLstLista() {
@@ -65,22 +74,22 @@ public class ClienteController implements Serializable{
       public void limpiar() {
         lstLista.clear();
     }
-  public void eliminarCliente(int id) {
+  public void eliminar(int id) {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
         restConsumer.borraApiCliente(id);
         lstLista = restConsumer.consumeApiCliente();
     }
 
-    public void guardarCliente() {
+    public void guardar() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
-        Cliente cliente = new Cliente(this.nombres,  this.telefono);
+        Cliente cliente = new Cliente(this.nombres,  this.telefono, this.Apellido);
         restConsumer.guardaApiCliente(cliente);
         lstLista = restConsumer.consumeApiCliente();
     }
 
-public void actualizarCliente(Cliente cliente) {
+public void actualizar(Cliente cliente) {
     SpringRestConsumer restConsumer = new SpringRestConsumer();
-    restConsumer.actualizaApiCliente(cliente);
+    restConsumer.actualizaApiCliente(cliente, cliente.getId_cliente());
     lstLista = restConsumer.consumeApiCliente();
 }
 

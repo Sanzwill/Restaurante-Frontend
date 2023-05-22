@@ -15,11 +15,13 @@ public class Restaurante {
     private String telefono;
 
     public Restaurante(String nombre, String direccion, String telefono) {
+        this.id_restautante = id_restautante;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
     }
 
+  
     public Integer getId_restautante() {
         return id_restautante;
     }

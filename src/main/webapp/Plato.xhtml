@@ -17,17 +17,23 @@
 
     <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
         <h:head>
+              <p:card style=" display: flex; align-items: center; justify-content: center; background-color: navajowhite ">
+                <f:facet name="title">
+                    Plato
+                     <p:button icon="pi pi-home" styleClass="rounded-button ui-button-secondary ui-button-outlined" id="btnguardar" value="HOME" href="index.xhtml" />
+                </f:facet>
+            </p:card>
         </h:head>
         <h:body>
             <h:form>
                 <p:growl id="growl" showDetail="true" />
                 <p:card>
-                    <f:facet name="title">
+                    <f:facet name="title"   >
                        Reserva de plato 
                     </f:facet>
                 </p:card>
-                <h1>Registro  de la reverva </h1>
-                <h:panelGrid id="grid" columns="4" >
+                <p:card> 
+                 <h:panelGrid id="grid" columns="4" >
                     <p:outputLabel for="nombre" value="Nombre" />
                     <p:inputText id="nombre" value="#{platoController.nombre}"/>
                     <p:outputLabel for="descripcion" value="Descripcion" />
@@ -36,9 +42,11 @@
                     <p:outputLabel for="precio" value="precio" />
                     <p:inputText id="precio" value="#{platoController.precio}"/>
                 </h:panelGrid>
+                </p:card>
+                <p:separator/>
                 <p:commandButton value="Guardar Empleado" action="#{platoController.guardar}" process="@form" update="tblClientes, growl"/>
 
-                <h1>Datos de los empleados</h1>
+                <h1>Datos de de la Reserva</h1>
                 <div class="card">
                     <p:dataTable id="tblClientes" var="plato" value="#{platoController.lstplato}" >
                         <p:column headerText="ID">
@@ -58,7 +66,7 @@
                         </p:column>
                        
                         <p:column headerText="Actions">
-                            <p:commandButton value="Eliminar" actionListener="#{platoController.eliminar(Plato.id_plato)}" process="@form" update="tblClientes" />
+                            <p:commandButton value="Eliminar" actionListener="#{platoController.eliminar(plato.id_plato)}" process="@form" update="tblClientes" />
                         </p:column>
                     </p:dataTable>
                 

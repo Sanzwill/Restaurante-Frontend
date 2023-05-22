@@ -1,4 +1,5 @@
 com\test\spring\controller\EmpleadoController.class
+com\test\spring\controller\ReservacionController.class
 com\test\spring\controller\ClienteController.class
 com\test\spring\pojo\Factura.class
 com\test\spring\controller\DetalleController.class
@@ -19,6 +20,7 @@ com\test\spring\pojo\Reporte.class
 com\test\spring\resources\JakartaEE91Resource.class
 com\test\spring\controller\RestauranteController.class
 com\test\spring\pojo\Empleados.class
+com\test\spring\pojo\reservacion.class
 com\test\spring\pojo\Plato.class
 com\test\spring\controller\MesaController.class
 com\test\spring\pojo\Detalle.class

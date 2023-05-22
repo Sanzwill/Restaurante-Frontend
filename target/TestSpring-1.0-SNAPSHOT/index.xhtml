@@ -1,38 +1,116 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html  xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-    
-      xmlns:p="http://primefaces.org/ui">
-       
+       xmlns:h="http://java.sun.com/jsf/html"
+
+       xmlns:p="http://primefaces.org/ui"
+       xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <h:head>
-         <title>Score</title>
+        <style type="text/css">
+            
+            #p_carouselid{
+                width: 360px;
+                height: 60px;
+                margin: 0 auto;
+            }
+
+        </style>
+        <title>Score</title>
     </h:head>
     <h:body>
-        <p:card style="margin-top: 20px; background-color: lavenderblush">
-        <p:menubar>
-        <p:submenu label="File" icon="pi pi-file">
-            <p:submenu label="Registro" icon="pi pi-briefcase">
-                <p:menuitem value="Factura" url="Factura.xhtml" />
-                <p:menuitem value="Categoria" url="categoria.xhtml" />
-                <p:menuitem value="Cliente" url="Cliente.xhtml" />
-                <p:menuitem value="Orden" url="Orden.xhtml" />
-                <p:menuitem value="Empleados" url="Empleados.xhtml" />
-                <p:menuitem value="Restaurante" url="Restaurante.xhtml" />
-                <p:menuitem value="Mesa" url="Mesa.xhtml" />
-               
-                <p:menuitem value="Plato" url="Plato.xhtml" />
-               
-                <p:menuitem value="Reporte" url="Reporte.xhtml" />
-               
-            </p:submenu>
-            
-            <p:menuitem value="Open" url="#" />
-            <p:separator />
-            <p:menuitem value="Quit" url="#" />
-        </p:submenu>
-           
-    </p:menubar>
-        </p:card >
+
+
+
+        <h:form> 
+            <p:menubar id="menuPrincipal" style="background-color: black; border: none;">
+                <p:submenu id="Menu" label="Menu" icon="pi pi-list">
+                    <p:menuitem value="Ver Menu" icon=" pi pi-inbox " url="http://localhost:8080/RestorantPHB-1.0-SNAPSHOT/LogIn.xhtml" />
+                </p:submenu>
+                <p:submenu id="Mycomida" label="My comida" icon="pi pi-chart-line">
+                    <p:menuitem value="Categoria"  icon="pi pi-chart-line"  url="categoria.xhtml" />
+                    <p:separator />
+                    <p:menuitem value="Orden"  icon="pi pi-chart-line"  url="Orden.xhtml" />
+                    <p:menuitem value="Restaurante" url="Restaurante.xhtml" />
+                    <p:menuitem value="Mesa" url="Mesa.xhtml" />
+
+                    <p:menuitem value="Plato" url="Plato.xhtml" />
+
+                    <p:separator />
+                    <p:menuitem value="Promociones" icon="pi pi-chart-line" url="http://localhost:8080/RestorantPHB-1.0-SNAPSHOT/LogIn.xhtml"/>
+                </p:submenu> <p:separator />
+
+
+                <p:submenu label="Carrito de compras" icon="pi pi-shopping-cart">
+                    <p:menuitem value="Ver carrito" icon="pi pi-shopping-cart" url="http://localhost:8080/RestorantPHB-1.0-SNAPSHOT/LogIn.xhtml"/>
+                </p:submenu>
+
+                <p:submenu id="Administrar" label="Administrar" icon="pi pi-chart-bar">
+                    <p:menuitem value="Cliente" url="Cliente.xhtml" icon=" pi pi-dollar "/>
+
+                    <p:separator />
+                    <p:menuitem value="Empleados" url="Empleados.xhtml" icon=" pi pi-sitemap "  />
+
+                    <p:separator />
+                    <p:menuitem value="Factura" url="Factura.xhtml" icon=" pi pi-briefcase " />
+                    <p:menuitem value="Reporte" url="Reporte.xhtml" icon=" pi pi-briefcase "  />
+
+                    <p:menuitem value="Reservacion" url="Reservacion.xhtml" icon=" pi pi-briefcase "  />
+
+                </p:submenu>
+
+                <f:facet name="options">
+                    <p:inputText style="margin:1px 10px 1px 1px;" placeholder="Search"/>
+                </f:facet>
+            </p:menubar> 
+        </h:form>
+        <div id="header" style="background-color: #CC0000; color: white; text-align: center; padding: 20px;">
+            <h1 style="margin: 0;">Bienvenido al Restaurante</h1>
+        </div>
+
+
+
+        <div id="content" style="padding: 20px;">
+            <h2 style="color: #CC0000;">Nuestra especialidad:</h2>
+            <h3 style="margin-top: 0;">Comida De hugosex</h3>
+            <img src="https://images.squarespace-cdn.com/content/v1/56945af11c121086a88a2187/1497538880183-PSPGRVCMX6PFIGTV9898/ke17ZwdGBToddI8pDm48kNJlTcgGnwg1S4TJYInC57pZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIgyf-PYyujx-vS_RildzI7F9FwgJLvY6kaDAzAPrEzaQKMshLAGzx4R3EDFOm1kBS/locro+de+papas%2C+plato+t%C3%ADpico+del+Ecuador" alt="Imagen del Restaurante" style="max-width: 100%; height: auto; margin-bottom: 20px;" />
+            <p style="font-size: 16px;">El Restaurante es famoso por su deliciosa comida italiana. Disfrute de nuestras pastas, pizzas, ensaladas y mucho más.</p>
+            <h2 style="color: #CC0000;">Horario de atención:</h2>
+            <p style="font-size: 16px;">Lunes a Domingos: 12:00pm - 10:00pm</p>
+        </div>
+
+        <div style="text-align: center;">
+            <h1>Bienvenido a Comida Deli</h1>
+            <p>¡El lugar perfecto para disfrutar de una gran variedad de deliciosos platillos!</p>
+            <br/>
+            <div>
+                <p:carousel value="Imagen/" var="Image" numVisible="6" 
+                            circular="true" autoplayInterval="3000" id="p_carouselid">
+                    <p:graphicImage  name="Imagen" style="width: 100px; height: 100px;"/>
+                </p:carousel>
+            </div>
+            <br/>
+            <div>
+                <h3>¡Descubre nuestros platillos!</h3>
+                <img src="../../main/java/Imagen/caldo.jpg " width="60%" height="height" alt="alt"/>
+                <p:graphicImage name="Imagen/caldo.jpg" style="width: 100%;"/>
+                <p:graphicImage name="Imagen/ceviche.jpg" style="width: 100%;"/>
+                <p:graphicImage name="Imagen/imagen3.jpg" style="width: 100%;"/>
+                <p:graphicImage name="Imagen/imagen4.jpg" style="width: 100%;"/>
+
+            </div>
+            <br/>
+            <div>
+                <h3>Sobre nosotros</h3>
+                <p>Comida Deli es un restaurante especializado en ofrecer una amplia selección de platillos
+                    exquisitos y sabrosos. Nos enorgullece utilizar ingredientes frescos y de alta calidad
+                    para brindar experiencias gastronómicas únicas a nuestros comensales.</p>
+            </div>
+        </div>
     </h:body>
 </html>
+
+
+
+
+

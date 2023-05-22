@@ -15,19 +15,21 @@
 
     <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
         <h:head>
-            <p:card style=" display: flex; align-items: center; justify-content: center; background-color: #48cae4 ">
+            <p:card style=" display: flex; align-items: center; justify-content: center; background-color: wheat ">
                 <f:facet name="title">
-                    VENTAS
+                    Orden de Reserva
                      <p:button icon="pi pi-home" styleClass="rounded-button ui-button-secondary ui-button-outlined" id="btnguardar" value="HOME" href="index.xhtml" />
                 </f:facet>
             </p:card>
         </h:head>
-        <h:body style="background-color: #ade8f4">
+        <h:body style="background-color: snow">
             <h:form > 
-                <p:card style="background-color: #ade8f4" >
+                <p:card style="background-color: snow" >
                 <h:panelGrid id="grid" cellpadding="7"  columns="2">
                     <p:outputLabel  for="date" value="fecha"/>
-                    <p:inputText id="date" value="#{ordenController.fechaHora}"/>
+                    <p:datePicker   id="date" value="#{ordenController.fechaHora}"/>
+                    <p:outputLabel  for="nombre" value="Nombre del Plato"/>
+                    <p:inputText  id="nombre" value="#{ordenController.nombre_plato}"/>
                     
                 </h:panelGrid>
                 <p:commandButton  icon="pi pi-bookmark" value="Guardar" action="#{ordenController.guardarorden}" process="@form" />
@@ -47,20 +49,19 @@
                             <h:outputText value="#{orden.idOrden}" />
                         </p:column>
 
-                        <p:column headerText="idMesa" sortBy="#{orden.id_mesa}">
-                            <h:outputText value="#{orden.id_mesa}" />
-                        </p:column>
+                     
                         <p:column headerText="fecha" sortBy="#{orden.fechaHora}">
-                            <h:outputText value="#{orden.fechaHora}" />
+                            <h:outputText id="date" value="#{orden.fechaHora}" />
+                            
                         </p:column>
-                        <p:column headerText="idempleado" sortBy="#{orden.id_empleado}">
-                            <h:outputText value="#{orden.id_empleado}" />
+                        <p:column headerText="nombre_plato" sortBy="#{orden.nombre_plato}">
+                            <h:outputText value="#{orden.nombre_plato}" />
                         </p:column>
 
                         
 
                         <p:column headerText="Actions">
-                            <p:commandButton value="Eliminar" actionListener="#{ordenController.eliminarorden(Orden.idOrden)}" process="@form" update="tblFactura" />
+                            <p:commandButton value="Eliminar" actionListener="#{ordenController.eliminarorden(orden.idOrden)}" process="@form" update="tblFactura" />
                         </p:column>
                     </p:dataTable>
                 </div>

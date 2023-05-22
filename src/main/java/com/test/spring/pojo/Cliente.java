@@ -13,14 +13,15 @@ public class Cliente {
     public Integer id_cliente;
     public String nombre;
     public String telefono;
+    public String Apellido;
 
-    public Cliente( String nombre, String telefono) {
-        
+    public Cliente(String nombre, String telefono, String Apellido) {
         this.nombre = nombre;
         this.telefono = telefono;
+        this.Apellido = Apellido;
     }
 
-   
+ 
 
     public Integer getId_cliente() {
         return id_cliente;
@@ -30,9 +31,6 @@ public class Cliente {
         this.id_cliente = id_cliente;
     }
 
-  
-
-   
     public String getNombre() {
         return nombre;
     }
@@ -48,6 +46,15 @@ public class Cliente {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public String getApellido() {
+        return Apellido;
+    }
+
+    public void setApellido(String Apellido) {
+        this.Apellido = Apellido;
+    }
+
     
     
     

@@ -19,16 +19,16 @@
 
     <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
         <h:head>
-            <p:card style=" display: flex; align-items: center; justify-content: center; background-color: #48cae4 ">
+            <p:card style=" display: flex; align-items: center; justify-content: center; background-color: wheat ">
                 <f:facet name="title">
                     Seleciona el tipo de Reserva del menu
                      <p:button icon="pi pi-home" styleClass="rounded-button ui-button-secondary ui-button-outlined" id="btnguardar" value="HOME" href="index.xhtml" />
                 </f:facet>
             </p:card>
         </h:head>
-        <h:body style="background-color: #ade8f4">
+        <h:body style="background-color: snow">
             <h:form > 
-                <p:card style="background-color: #ade8f4" >
+                <p:card >
                 <h:panelGrid id="grid" cellpadding="7" columns="2">
                     <p:outputLabel for="nombre" value="Selecion de menu"/>
                     <p:selectOneMenu id="nombre" value="#{categoriaController.nombre}">

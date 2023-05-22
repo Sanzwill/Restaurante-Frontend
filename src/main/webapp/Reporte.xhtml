@@ -15,6 +15,12 @@
 
     <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8">
         <h:head>
+              <p:card style=" display: flex; align-items: center; justify-content: center; background-color: papayawhip ">
+                <f:facet name="title">
+                    Reporte
+                     <p:button icon="pi pi-home" styleClass="rounded-button ui-button-secondary ui-button-outlined" id="btnguardar" value="HOME" href="index.xhtml" />
+                </f:facet>
+            </p:card>
         </h:head>
         <h:body>
             <h:form>
@@ -27,33 +33,33 @@
                
                 <h1>Datos del reporte </h1>
                 <div class="card">
-                    <p:dataTable id="tblClientes" var="empleado" value="#{reporteController.lstrepor}" >
+                    <p:dataTable id="tblClientes" var="reporte" value="#{reporteController.lstrepor}" >
                         <p:column headerText="ID">
-                            <h:outputText value="#{empleado.id_reporte}" />
+                            <h:outputText value="#{reporte.id_reporte}" />
                         </p:column>
 
                         <p:column headerText="NOMBRE">
-                            <h:outputText value="#{empleado.id_factura}" />
+                            <h:outputText value="#{reporte.id_factura}" />
                         </p:column>
 
                         <p:column headerText="APELLIDO">
-                            <h:outputText value="#{empleado.id_cliente}" />
+                            <h:outputText value="#{reporte.id_cliente}" />
                         </p:column>
                         <p:column headerText="TELÉFONO">
-                            <h:outputText value="#{empleado.id_mesa}" />
+                            <h:outputText value="#{reporte.id_mesa}" />
                         </p:column>
                         <p:column headerText="SALARIO">
-                            <h:outputText value="#{empleado.fecha_factura}" />
+                            <h:outputText value="#{reporte.fecha_factura}" />
                         </p:column>
                         <p:column headerText="SALARIO">
-                            <h:outputText value="#{empleado.nombre}" />
+                            <h:outputText value="#{reporte.nombre}" />
                         </p:column>
                         <p:column headerText="SALARIO">
-                            <h:outputText value="#{empleado.total}" />
+                            <h:outputText value="#{reporte.total}" />
                         </p:column>
                        
                         <p:column headerText="Actions">
-                            <p:commandButton value="Eliminar" actionListener="#{reporteController.eliminar(Reporte.id_reporte)}" process="@form" update="tblClientes" />
+                            <p:commandButton value="Eliminar" actionListener="#{reporteController.eliminar(reporte.id_reporte)}" process="@form" update="tblClientes" />
                         </p:column>
                     </p:dataTable>
                 

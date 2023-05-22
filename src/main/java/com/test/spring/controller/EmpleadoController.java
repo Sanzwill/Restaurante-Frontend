@@ -13,12 +13,21 @@ import java.util.List;
 @ViewScoped
 public class EmpleadoController implements Serializable {
     private List<Empleados> lstEmpledos = new ArrayList<>();
+     private Integer id_empleado;
     private String nombre;
     private String apellido;
     private String telefono;
     private String salario;
 
     public EmpleadoController() {
+    }
+
+    public Integer getId_empleado() {
+        return id_empleado;
+    }
+
+    public void setId_empleado(Integer id_empleado) {
+        this.id_empleado = id_empleado;
     }
 
     public List<Empleados> getLstEmpledos() {
@@ -70,7 +79,7 @@ public class EmpleadoController implements Serializable {
         lstEmpledos.clear();
     }
 
-    public void eliminarempledo(int id) {
+    public void eliminar(int id) {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
         restConsumer.borraApiCliente(id);
         lstEmpledos = restConsumer.consumeApiEmpleados();
@@ -78,7 +87,7 @@ public class EmpleadoController implements Serializable {
 
     public void guardarempledo() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
-        Empleados empleado = new Empleados(apellido, nombre, salario, telefono);
+        Empleados empleado = new Empleados(this.apellido, this.nombre, this.salario, this.telefono);
         restConsumer.guardaApiEmpleados(empleado);
         lstEmpledos = restConsumer.consumeApiEmpleados();
         limpiarCampos();

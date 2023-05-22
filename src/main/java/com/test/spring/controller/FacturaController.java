@@ -10,6 +10,7 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -18,12 +19,9 @@ import java.util.List;
 public class FacturaController implements Serializable{
     
     List <Factura> lstfactura=new ArrayList<>();
-    private Long id_factura;
-    private Long id_cliente;
-    private String num_mesa;
-    private String metodo_pago;
+    private Long idFactura;
+  private Date fechaFactura;
     private String total;
-    private String fecha_transacion;
 
     public List<Factura> getLstfactura() {
         return lstfactura;
@@ -33,36 +31,22 @@ public class FacturaController implements Serializable{
         this.lstfactura = lstfactura;
     }
 
-    public Long getId_factura() {
-        return id_factura;
+    public Long getIdFactura() {
+        return idFactura;
     }
 
-    public void setId_factura(Long id_factura) {
-        this.id_factura = id_factura;
+    public void setIdFactura(Long idFactura) {
+        this.idFactura = idFactura;
     }
 
-    public Long getId_cliente() {
-        return id_cliente;
+  
+
+    public Date getFechaFactura() {
+        return fechaFactura;
     }
 
-    public void setId_cliente(Long id_cliente) {
-        this.id_cliente = id_cliente;
-    }
-
-    public String getNum_mesa() {
-        return num_mesa;
-    }
-
-    public void setNum_mesa(String num_mesa) {
-        this.num_mesa = num_mesa;
-    }
-
-    public String getMetodo_pago() {
-        return metodo_pago;
-    }
-
-    public void setMetodo_pago(String metodo_pago) {
-        this.metodo_pago = metodo_pago;
+    public void setFechaFactura(Date fechaFactura) {
+        this.fechaFactura = fechaFactura;
     }
 
     public String getTotal() {
@@ -73,13 +57,8 @@ public class FacturaController implements Serializable{
         this.total = total;
     }
 
-    public String getFecha_transacion() {
-        return fecha_transacion;
-    }
 
-    public void setFecha_transacion(String fecha_transacion) {
-        this.fecha_transacion = fecha_transacion;
-    }
+    
      public void callApi() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
         lstfactura = restConsumer.consumeApifactura();
@@ -97,7 +76,7 @@ public class FacturaController implements Serializable{
 
        public void guardarfactura() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
-        Factura factu = new Factura(this.num_mesa, this.metodo_pago, this.fecha_transacion, this.total);
+        Factura factu = new Factura(this.fechaFactura,  this.total);
         restConsumer.guardaApifactura(factu);
         lstfactura= restConsumer.consumeApifactura();
     }

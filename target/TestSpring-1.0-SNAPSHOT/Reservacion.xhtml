@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <style>
+        p {
+            line-height: 1.5;
+            margin: 0;
+        }
+    </style>
+
+    <f:view contentType="text/html;charset=UTF-8" encoding="UTF-8" >
+        <h:head  >
+              <p:card style=" display: flex; align-items: center; justify-content: center; background-color: floralwhite ">
+                <f:facet name="title">
+                     Reservacion del Restaurante 
+                     <p:button icon="pi pi-home" styleClass="rounded-button ui-button-secondary ui-button-outlined" id="btnguardar" value="HOME" href="index.xhtml" />
+                </f:facet>
+            </p:card>
+        </h:head>
+        <h:body>
+            <h:form>
+                <p:growl id="growl" showDetail="true" />
+                
+              
+                <p:card>
+                    <h:panelGrid id="grid" columns="4" >
+                    <p:outputLabel for="nombres" value="NOMBRE COMPLETO Cliente" />
+                    <p:inputText id="nombres" value="#{reservaController.nombre_cliente}"/>
+                    <p:outputLabel for="fecha" value="Fecha" />
+                    <p:datePicker  id="fecha"  value="#{reservaController.fecha_hora}"/>
+                    <p:outputLabel for="duracion" value="Tiempo de reserva" />
+                    <p:inputText id="duracion" value="#{reservaController.duracion}"/>
+                    </h:panelGrid>
+                </p:card>
+                
+                <p:commandButton value="Guardar Reserva" action="#{reservaController.guardar}" process="@form" update="tblreserva, growl"/>
+
+                <h1>Datos de Reserva</h1>
+                <div class="card" >
+                    <p:dataTable id="tblreserva" var="reserva" value="#{reservaController.lstreser}" >
+                        <p:column headerText="ID">
+                            <h:outputText value="#{reserva.id_reservacion}" />
+                        </p:column>
+
+                        <p:column headerText="NOMBRE">
+                            <h:outputText value="#{reserva.nombre_cliente}" />
+                        </p:column>
+
+              
+                        <p:column headerText="Fecha">
+                            <h:outputText value="#{reserva.fecha_hora}" />
+                        </p:column>
+                        <p:column headerText="Tiempo">
+                            <h:outputText value="#{reserva.duracion}" />
+                        </p:column>
+                       
+                        <p:column headerText="Actions">
+                            <p:commandButton value="Eliminar" actionListener="#{reservaController.borrar(reserva.id_reservacion)}" process="@form" update="tblreserva" />
+                        <p:commandButton value="Actualizar" actionListener="#{reservaController.actualizarCliente(cliente)}" process="@form" update="tblreserva" />
+</p:column>
+                    </p:dataTable>
+                </div>
+
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="CONSULTAR" icon="pi pi-search" actionListener="#{reservaController.callApi}" process="@form" update="tblreserva, growl" styleClass="mr-2"/>                        
+                      
+                        <p:commandButton value="LIMPIAR" icon="pi pi-minus" actionListener="#{reservaController.limpiar}" process="@form" update="tblreserva, growl" styleClass="ui-button-danger"/> 
+                      
+  
+
+                    
+                    </p:toolbarGroup>
+                </p:toolbar>    
+            </h:form>
+            <h:form>
+
+ <p:menuitem value="Open" url="#" />
+            <p:separator />
+            </h:form>
+        </h:body>
+    </f:view>
+
+</html>

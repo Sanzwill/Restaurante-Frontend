@@ -4,19 +4,30 @@
  */
 package com.test.spring.pojo;
 
+import java.util.Date;
+
 /**
  *
  * @author hugo
  */
 public class Orden {
     private Integer idOrden;
-            private String fechaHora;
-            private Integer id_mesa;
-            private Integer id_empleado;
+            private Date fechaHora;
+            private String nombre_plato;
 
-    public Orden(String fechaHora) {
+    public Orden(Date fechaHora, String nombre_plato)
+    {
         this.fechaHora = fechaHora;
+        this.nombre_plato = nombre_plato;
     }
+
+    public Orden(Integer idOrden, Date fechaHora, String nombre_plato) {
+        this.idOrden = idOrden;
+        this.fechaHora = fechaHora;
+        this.nombre_plato = nombre_plato;
+    }
+    
+    
 
     public Integer getIdOrden() {
         return idOrden;
@@ -26,30 +37,23 @@ public class Orden {
         this.idOrden = idOrden;
     }
 
-    public String getFechaHora() {
+    public Date getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(String fechaHora) {
+    public void setFechaHora(Date fechaHora) {
         this.fechaHora = fechaHora;
     }
 
-    public Integer getId_mesa() {
-        return id_mesa;
+    public String getNombre_plato() {
+        return nombre_plato;
     }
 
-    public void setId_mesa(Integer id_mesa) {
-        this.id_mesa = id_mesa;
+    public void setNombre_plato(String nombre_plato) {
+        this.nombre_plato = nombre_plato;
     }
 
-    public Integer getId_empleado() {
-        return id_empleado;
-    }
-
-    public void setId_empleado(Integer id_empleado) {
-        this.id_empleado = id_empleado;
-    }
-            
+       
                     
     
 }

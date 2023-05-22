@@ -23,9 +23,9 @@ import java.util.List;
 @ViewScoped
 public class MesaController implements Serializable {
      List<Mesa> lstmesa = new ArrayList<>();
-     private Integer id_mesa;
+       private Integer id_mesa;
+    private String numero_mesa;
     private String capacidad;
-    private Integer  id_restaurante;
 
     public List<Mesa> getLstmesa() {
         return lstmesa;
@@ -51,13 +51,15 @@ public class MesaController implements Serializable {
         this.capacidad = capacidad;
     }
 
-    public Integer getId_restaurante() {
-        return id_restaurante;
+    public String getNumero_mesa() {
+        return numero_mesa;
     }
 
-    public void setId_restaurante(Integer id_restaurante) {
-        this.id_restaurante = id_restaurante;
+    public void setNumero_mesa(String numero_mesa) {
+        this.numero_mesa = numero_mesa;
     }
+
+ 
     
     public void callApi() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
@@ -74,7 +76,7 @@ public class MesaController implements Serializable {
 
     public void guardar() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
-        Mesa mesa = new Mesa(this.capacidad);
+        Mesa mesa = new Mesa(this.capacidad,this.numero_mesa);
         restConsumer.guardarmesa(mesa);
         lstmesa = restConsumer.consumemesa();
     }

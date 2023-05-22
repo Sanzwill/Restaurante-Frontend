@@ -11,6 +11,7 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,9 +23,8 @@ import java.util.List;
 public class OrdenController implements Serializable{
      List<Orden> lstorden = new ArrayList<>();
     private Integer idOrden;
-            private String fechaHora;
-            private Integer id_mesa;
-            private Integer id_empleado;
+            private Date fechaHora;
+           private String nombre_plato;
 
     public List<Orden> getLstorden() {
         return lstorden;
@@ -42,30 +42,24 @@ public class OrdenController implements Serializable{
         this.idOrden = idOrden;
     }
 
-    public String getFechaHora() {
+    public Date getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(String fechaHora) {
+    public void setFechaHora(Date fechaHora) {
         this.fechaHora = fechaHora;
     }
 
-    public Integer getId_mesa() {
-        return id_mesa;
+    public String getNombre_plato() {
+        return nombre_plato;
     }
 
-    public void setId_mesa(Integer id_mesa) {
-        this.id_mesa = id_mesa;
+    public void setNombre_plato(String nombre_plato) {
+        this.nombre_plato = nombre_plato;
     }
 
-    public Integer getId_empleado() {
-        return id_empleado;
-    }
 
-    public void setId_empleado(Integer id_empleado) {
-        this.id_empleado = id_empleado;
-    }
-    
+        
      public void callApi() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
         lstorden = restConsumer.consumeOrden();
@@ -76,12 +70,12 @@ public class OrdenController implements Serializable{
   public void eliminarorden(int id) {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
         restConsumer.borraOrden(id);
-        lstorden = restConsumer.consumeOrden();
+       lstorden = restConsumer.consumeOrden();
     }
 
     public void guardarorden() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
-        Orden orden = new Orden(this.fechaHora);
+        Orden orden = new Orden(this.fechaHora, this.nombre_plato);
         restConsumer.guardarorden(orden);
         lstorden = restConsumer.consumeOrden();
     }
