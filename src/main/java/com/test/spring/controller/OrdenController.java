@@ -4,7 +4,6 @@
  */
 package com.test.spring.controller;
 
-
 import com.test.spring.pojo.Orden;
 import com.test.spring.service.SpringRestConsumer;
 import jakarta.faces.view.ViewScoped;
@@ -18,13 +17,16 @@ import java.util.List;
  *
  * @author hugo
  */
-@Named(value="ordenController")
+@Named(value = "ordenController")
 @ViewScoped
-public class OrdenController implements Serializable{
-     List<Orden> lstorden = new ArrayList<>();
+public class OrdenController implements Serializable {
+
+    List<Orden> lstorden = new ArrayList<>();
     private Integer idOrden;
-            private Date fechaHora;
-           private String nombre_plato;
+    private String fechaHora;
+    private String nombre_plato;
+    private Orden ordenteEditando;
+    private boolean modoEdicion;
 
     public List<Orden> getLstorden() {
         return lstorden;
@@ -42,11 +44,11 @@ public class OrdenController implements Serializable{
         this.idOrden = idOrden;
     }
 
-    public Date getFechaHora() {
+    public String getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(Date fechaHora) {
+    public void setFechaHora(String fechaHora) {
         this.fechaHora = fechaHora;
     }
 
@@ -58,19 +60,37 @@ public class OrdenController implements Serializable{
         this.nombre_plato = nombre_plato;
     }
 
+    public Orden getOrdenteEditando() {
+        return ordenteEditando;
+    }
 
-        
-     public void callApi() {
+    public void setOrdenteEditando(Orden ordenteEditando) {
+        this.ordenteEditando = ordenteEditando;
+    }
+
+    public boolean isModoEdicion() {
+        return modoEdicion;
+    }
+
+    public void setModoEdicion(boolean modoEdicion) {
+        this.modoEdicion = modoEdicion;
+    }
+
+
+
+    public void callApi() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
         lstorden = restConsumer.consumeOrden();
     }
-      public void limpiar() {
+
+    public void limpiar() {
         lstorden.clear();
     }
-  public void eliminarorden(int id) {
+
+    public void eliminarorden(int id) {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
         restConsumer.borraOrden(id);
-       lstorden = restConsumer.consumeOrden();
+        lstorden = restConsumer.consumeOrden();
     }
 
     public void guardarorden() {
@@ -78,7 +98,26 @@ public class OrdenController implements Serializable{
         Orden orden = new Orden(this.fechaHora, this.nombre_plato);
         restConsumer.guardarorden(orden);
         lstorden = restConsumer.consumeOrden();
+        this.setFechaHora("");
+        this.setNombre_plato("");
+    }
+    public void editar(Integer idOrden, String nombre_plato, String fechaHora) {
+        modoEdicion = true;
+        this.setIdOrden(idOrden);
+        this.setFechaHora(fechaHora);
+        this.setNombre_plato(nombre_plato);
+    
+
     }
 
-    
+    public void ActualizarCliente() {
+        SpringRestConsumer restConsumer = new SpringRestConsumer();
+        String response = restConsumer.actualizarorden(this.getIdOrden(), this.getNombre_plato(), this.getFechaHora());
+        this.callApi();
+        this.setFechaHora("");
+        this.setNombre_plato("");
+        
+        modoEdicion = false;
+    }
+
 }

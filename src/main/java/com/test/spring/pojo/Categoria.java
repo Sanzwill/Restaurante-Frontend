@@ -14,7 +14,7 @@ public class Categoria {
     private String nombre;
 
     public Categoria(String nombre) {
-        this.id_categoria = id_categoria;
+      
         this.nombre = nombre;
     }
 

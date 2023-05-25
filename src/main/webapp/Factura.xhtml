@@ -26,18 +26,12 @@
             <h:form > 
                 <p:card style="background-color: #ade8f4" >
                 <h:panelGrid id="grid" cellpadding="7" columns="2">
-                    <p:outputLabel for="id_factura" value="FECHA DE VENTA"/>
-                    <p:inputText id="id_factura" value="#{facturaController.id_factura}"/>
-                    <p:outputLabel for="id_cliente" value="TOTAL DE VENTAS" />
-                    <p:inputText id="id_cliente" value="#{facturaController.id_cliente}"/>
-                    <p:outputLabel for="num_mesa" value="DESCUENTO DE VENTA" />
-                    <p:inputText id="num_mesa" value="#{facturaController.num_mesa}"/>
-                    <p:outputLabel for="metodo_pago" value="DESCUENTO DE VENTA" />
-                    <p:inputText id="metodo_pago" value="#{facturaController.metodo_pago}"/>
-                    <p:outputLabel for="fecha_transacion" value="DESCUENTO DE VENTA" />
-                    <p:inputText id="fecha_transacion" value="#{facturaController.fecha_transacion}"/>
-                    <p:outputLabel for="total" value="DESCUENTO DE VENTA" />
+                
+                    <p:outputLabel for="fecha" value="Fecha" />
+                    <p:datePicker id="fecha" value="#{facturaController.fechaFactura}"/>
+                    <p:outputLabel for="total" value="Total" />
                     <p:inputText id="total" value="#{facturaController.total}"/>
+                
                 </h:panelGrid>
                 <p:commandButton  icon="pi pi-bookmark" value="Guardar" action="#{facturaController.guardarfactura}" process="@form" />
                 </p:card>
@@ -53,29 +47,20 @@
                 <div class="card">
                     <p:dataTable id="tblFactura" var="factura" value="#{facturaController.lstfactura}" >
                         <p:column headerText="ID">
-                            <h:outputText value="#{factura.id_factura}" />
+                            <h:outputText value="#{factura.idFactura}" />
                         </p:column>
 
-                        <p:column headerText="FECHA" sortBy="#{factura.id_cliente}">
-                            <h:outputText value="#{factura.id_cliente}" />
+                        <p:column headerText="FECHA" sortBy="#{factura.fechaFactura}">
+                            <h:outputText value="#{factura.fechaFactura}" />
                         </p:column>
 
-                        <p:column headerText="TOTAL" sortBy="#{factura.num_mesa}">
-                            <h:outputText value="#{factura.num_mesa}" />
-                        </p:column>
                         
-                        <p:column headerText="Descuento" sortBy="#{factura.metodo_pago}">
-                            <h:outputText value="#{factura.metodo_pago}" />
-                        </p:column>
-                        <p:column headerText="Descuento" sortBy="#{factura.fecha_transacion}">
-                            <h:outputText value="#{factura.fecha_transacion}" />
-                        </p:column>
-                        <p:column headerText="Descuento" sortBy="#{factura.total}">
+                        <p:column headerText="Total" sortBy="#{factura.total}">
                             <h:outputText value="#{factura.total}" />
                         </p:column>
 
                         <p:column headerText="Actions">
-                            <p:commandButton value="Eliminar" actionListener="#{facturaController.Eliminarfactura(factura.id_factura)}" process="@form" update="tblFactura" />
+                            <p:commandButton value="Eliminar" actionListener="#{facturaController.Eliminarfactura(factura.idFactura)}" process="@form" update="tblFactura" />
                         </p:column>
                     </p:dataTable>
                 </div>

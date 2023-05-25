@@ -4,7 +4,7 @@
  */
 package com.test.spring.controller;
 
-import com.test.spring.pojo.Cliente;
+
 import com.test.spring.pojo.Mesa;
 import com.test.spring.service.SpringRestConsumer;
 import jakarta.faces.view.ViewScoped;
@@ -26,6 +26,8 @@ public class MesaController implements Serializable {
        private Integer id_mesa;
     private String numero_mesa;
     private String capacidad;
+        private Mesa MesateEditando;
+    private boolean modoEdicion;
 
     public List<Mesa> getLstmesa() {
         return lstmesa;
@@ -43,14 +45,6 @@ public class MesaController implements Serializable {
         this.id_mesa = id_mesa;
     }
 
-    public String getCapacidad() {
-        return capacidad;
-    }
-
-    public void setCapacidad(String capacidad) {
-        this.capacidad = capacidad;
-    }
-
     public String getNumero_mesa() {
         return numero_mesa;
     }
@@ -59,8 +53,30 @@ public class MesaController implements Serializable {
         this.numero_mesa = numero_mesa;
     }
 
- 
-    
+    public String getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(String capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    public Mesa getMesateEditando() {
+        return MesateEditando;
+    }
+
+    public void setMesateEditando(Mesa MesateEditando) {
+        this.MesateEditando = MesateEditando;
+    }
+
+    public boolean isModoEdicion() {
+        return modoEdicion;
+    }
+
+    public void setModoEdicion(boolean modoEdicion) {
+        this.modoEdicion = modoEdicion;
+    }
+
     public void callApi() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
         lstmesa = restConsumer.consumemesa();
@@ -79,6 +95,25 @@ public class MesaController implements Serializable {
         Mesa mesa = new Mesa(this.capacidad,this.numero_mesa);
         restConsumer.guardarmesa(mesa);
         lstmesa = restConsumer.consumemesa();
+        this.setCapacidad("");
+        this.setNumero_mesa("");
+    }
+public void editar(Integer id_mesa, String capacidad, String numero_mesa) {
+        modoEdicion = true;
+        this.setId_mesa(id_mesa);
+        this.setCapacidad(capacidad);
+        this.setNumero_mesa(numero_mesa);
+
+    }
+
+    public void ActualizarCliente() {
+        SpringRestConsumer restConsumer = new SpringRestConsumer();
+        String response = restConsumer.actualizarmesa(this.getId_mesa(), this.getCapacidad(),this.getNumero_mesa());
+        this.callApi();
+        this.setCapacidad("");
+        this.setNumero_mesa("");
+        
+        modoEdicion = false;
     }
 
     

@@ -12,10 +12,12 @@ com\test\spring\controller\PlatoController.class
 com\test\spring\pojo\Cliente.class
 com\test\spring\controller\FacturaController.class
 com\test\spring\controller\OrdenController.class
+com\test\spring\controller\LoginController.class
 com\test\spring\pojo\Restaurante.class
 com\test\spring\controller\CategoriaController.class
 com\test\spring\service\SpringRestConsumer.class
 com\test\spring\controller\reportecontroller.class
+com\test\spring\pojo\Login.class
 com\test\spring\pojo\Reporte.class
 com\test\spring\resources\JakartaEE91Resource.class
 com\test\spring\controller\RestauranteController.class

@@ -12,11 +12,11 @@ import java.util.Date;
  */
 public class reservacion {
     private Integer id_reservacion;
-    private Date fecha_hora;
+    private String fecha_hora;
     private String nombre_cliente;
     private String duracion;
 
-    public reservacion(String nombre_cliente, String duracion, Date fecha_hora) {
+    public reservacion(String fecha_hora, String nombre_cliente, String duracion) {
         this.fecha_hora = fecha_hora;
         this.nombre_cliente = nombre_cliente;
         this.duracion = duracion;
@@ -30,11 +30,11 @@ public class reservacion {
         this.id_reservacion = id_reservacion;
     }
 
-    public Date getFecha_hora() {
+    public String getFecha_hora() {
         return fecha_hora;
     }
 
-    public void setFecha_hora(Date fecha_hora) {
+    public void setFecha_hora(String fecha_hora) {
         this.fecha_hora = fecha_hora;
     }
 
@@ -53,5 +53,8 @@ public class reservacion {
     public void setDuracion(String duracion) {
         this.duracion = duracion;
     }
-
+    
+    
+    
+    
 }

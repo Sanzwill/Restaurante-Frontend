@@ -22,9 +22,8 @@ public class CategoriaController implements Serializable{
      List <Categoria> lstcatego =new ArrayList<>();
     private Integer id_categoria;
     private String nombre;
-
-    public CategoriaController() {
-    }
+  private Categoria cateEditando;
+    private boolean modoEdicion;
 
     public List<Categoria> getLstcatego() {
         return lstcatego;
@@ -49,6 +48,23 @@ public class CategoriaController implements Serializable{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public Categoria getCateEditando() {
+        return cateEditando;
+    }
+
+    public void setCateEditando(Categoria cateEditando) {
+        this.cateEditando = cateEditando;
+    }
+
+    public boolean isModoEdicion() {
+        return modoEdicion;
+    }
+
+    public void setModoEdicion(boolean modoEdicion) {
+        this.modoEdicion = modoEdicion;
+    }
+   
  public void callApi() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
         lstcatego = restConsumer.consumirApicategoria();
@@ -64,42 +80,32 @@ public class CategoriaController implements Serializable{
         lstcatego = restConsumer.consumirApicategoria();
     }
 
-//    public void guardaCategoria() {
-//        SpringRestConsumer restConsumer = new SpringRestConsumer();
-//        Categoria categoria = new Categoria(this.nombre);
-//        restConsumer.guardaCategoria(categoria);
-//        lstcatego = restConsumer.consumirApicategoria();
-//    }
-public void guardaCategoria() {
-    SpringRestConsumer restConsumer = new SpringRestConsumer();
-    
-    // Verificar si hay un ID eliminado disponible
-    Integer idDisponible = encontrarIdDisponible();
-    if (idDisponible != null) {
-        Categoria categoria = new Categoria(this.nombre);
-        restConsumer.guardaCategoria(categoria);
-    } else {
-        Categoria categoria = new Categoria(this.nombre);
-        restConsumer.guardaCategoria(categoria);
-    }
-    
-    lstcatego = restConsumer.consumirApicategoria();
-}
+   public void guardaCategoria() {
+       SpringRestConsumer restConsumer = new SpringRestConsumer();
+       Categoria categoria = new Categoria(this.nombre);
+       restConsumer.guardaCategoria(categoria);
+       lstcatego = restConsumer.consumirApicategoria();
+       this.setNombre("");
+   }
 
-private Integer encontrarIdDisponible() {
-    Integer idDisponible = null;
-    
-    // Verificar si hay un ID eliminado en la lista de categorías
-    for (Categoria categoria : lstcatego) {
-        if (categoria.getId_categoria() == null) {
-            idDisponible = categoria.getId_categoria();
-            break;
-        }
-    }
-    
-    return idDisponible;
-}
+ 
 
-    
+    public void editar(Integer id_categoria, String nombre) {
+        modoEdicion = true;
+        this.setId_categoria(id_categoria);
+        this.setNombre(nombre);
+        
+
+    }
+
+    public void ActualizarCate() {
+        SpringRestConsumer restConsumer = new SpringRestConsumer();
+        String response = restConsumer.actualizarcategoria(this.getId_categoria(), this.getNombre());
+        this.callApi();
+        this.setNombre("");
+       
+        modoEdicion = false;
+    }
+
     
 }

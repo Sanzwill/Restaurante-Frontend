@@ -47,6 +47,11 @@
                     <p:toolbarGroup>
                         <p:commandButton value="CONSULTAR" icon="pi pi-search" actionListener="#{categoriaController.callApi}" process="@form" update="tblFactura, growl" styleClass="mr-2"/>                        
                         <p:commandButton value="LIMPIAR" icon="pi pi-minus" actionListener="#{categoriaController.limpiar}" process="@form" update="tblFactura, growl" styleClass="ui-button-danger"/> 
+                        <p:commandButton value="Actualizar Cliente" action="#{categoriaController.ActualizarCate}"  rendered="#{categoriaController.modoEdicion}" process="@form" update=":form:tblFactura :form:growl" />
+
+                    
+                    
+                    
                     </p:toolbarGroup>
                 </p:toolbar>                
                 <div class="card">
@@ -63,6 +68,8 @@
 
                         <p:column headerText="Actions">
                             <p:commandButton value="Eliminar" actionListener="#{categoriaController.borraApiCategoria(factura.idCategoria)}" process="@form" update="tblFactura" />
+                             <p:commandButton value="Editar" action="#{categoriaController.editarCliente(factura.idCategoria, factura.nombre)}" update="tblFactura" />
+                       
                         </p:column>
                     </p:dataTable>
                 </div>

@@ -10,7 +10,7 @@ package com.test.spring.pojo;
  */
 public class Cliente {
     
-    public Integer id_cliente;
+    public Long id_cliente;
     public String nombre;
     public String telefono;
     public String Apellido;
@@ -23,11 +23,11 @@ public class Cliente {
 
  
 
-    public Integer getId_cliente() {
+    public Long getId_cliente() {
         return id_cliente;
     }
 
-    public void setId_cliente(Integer id_cliente) {
+    public void setId_cliente(Long id_cliente) {
         this.id_cliente = id_cliente;
     }
 

@@ -10,18 +10,19 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
-
-@Named(value="facturaController")
+@Named(value = "facturaController")
 @ViewScoped
-public class FacturaController implements Serializable{
-    
-    List <Factura> lstfactura=new ArrayList<>();
+public class FacturaController implements Serializable {
+
+    List<Factura> lstfactura = new ArrayList<>();
     private Long idFactura;
-  private Date fechaFactura;
+    private String fechaFactura;
     private String total;
+    private Factura facturaEditando;
+    private boolean modoEdicion;
 
     public List<Factura> getLstfactura() {
         return lstfactura;
@@ -39,13 +40,11 @@ public class FacturaController implements Serializable{
         this.idFactura = idFactura;
     }
 
-  
-
-    public Date getFechaFactura() {
+    public String getFechaFactura() {
         return fechaFactura;
     }
 
-    public void setFechaFactura(Date fechaFactura) {
+    public void setFechaFactura(String fechaFactura) {
         this.fechaFactura = fechaFactura;
     }
 
@@ -57,9 +56,23 @@ public class FacturaController implements Serializable{
         this.total = total;
     }
 
+    public Factura getFacturaEditando() {
+        return facturaEditando;
+    }
 
-    
-     public void callApi() {
+    public void setFacturaEditando(Factura facturaEditando) {
+        this.facturaEditando = facturaEditando;
+    }
+
+    public boolean isModoEdicion() {
+        return modoEdicion;
+    }
+
+    public void setModoEdicion(boolean modoEdicion) {
+        this.modoEdicion = modoEdicion;
+    }
+
+    public void callApi() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
         lstfactura = restConsumer.consumeApifactura();
     }
@@ -74,13 +87,34 @@ public class FacturaController implements Serializable{
         lstfactura = restConsumer.consumeApifactura();
     }
 
-       public void guardarfactura() {
+    public void guardarfactura() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
-        Factura factu = new Factura(this.fechaFactura,  this.total);
+        Factura factu = new Factura(this.fechaFactura, this.total);
         restConsumer.guardaApifactura(factu);
-        lstfactura= restConsumer.consumeApifactura();
+        lstfactura = restConsumer.consumeApifactura();
+      
+        this.setTotal("");
+        
+       
+    }
+     public void editarfactura(long idfactura, String total , String fechaFactura) {
+        modoEdicion = true;
+        this.setIdFactura(idfactura);
+        this.setFechaFactura(fechaFactura);
+        this.setTotal(total);
+
     }
 
+    public void ActualizarCliente() {
+        SpringRestConsumer restConsumer = new SpringRestConsumer();
+        String response = restConsumer.actualizarfactur(this.getIdFactura(), this.getFechaFactura(),this.getTotal());
+        this.callApi();
+        this.setFechaFactura("");
+        this.setTotal("");
+       
+        modoEdicion = false;
+    }
+    
     
 
 }

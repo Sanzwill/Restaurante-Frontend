@@ -17,7 +17,7 @@
         <h:head>
               <p:card style=" display: flex; align-items: center; justify-content: center; background-color: beige ">
                 <f:facet name="title">
-                    Empleados del Restautante
+                    Cliente 
                      <p:button icon="pi pi-home" styleClass="rounded-button ui-button-secondary ui-button-outlined" id="btnguardar" value="HOME" href="index.xhtml" />
                 </f:facet>
             </p:card>
@@ -28,7 +28,7 @@
                 <p:card>
                    
                 </p:card>
-                <h1>Registro de Empleados</h1>
+                <h1>Registro de  Cliente </h1>
                 <h:panelGrid id="grid" columns="4"  >
                     <p:outputLabel for="nombres" value="Nombre" />
                     <p:inputText id="nombres" value="#{clienteController.nombres}"/>
@@ -38,7 +38,7 @@
                     <p:inputText id="telefono" value="#{clienteController.telefono}"/>
                    
                 </h:panelGrid>
-                <p:commandButton value="Guardar cliente" action="#{clienteController.guardar}" process="@form" update="tblClientes, growl"/>
+                <p:commandButton value="Guardar cliente" action="#{clienteController.guardarCliente}" process="@form" update="tblClientes, growl"/>
 
                 <h1>Datos de los empleados</h1>
                 <div class="card">

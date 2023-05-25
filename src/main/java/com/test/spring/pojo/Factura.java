@@ -4,23 +4,19 @@
  */
 package com.test.spring.pojo;
 
-import com.test.spring.service.SpringRestConsumer;
-import java.util.Date;
-import java.util.List;
-
-
 public class Factura {
 
     
     private Long id_factura;
-    private Date fecha_factura;
+    private String fecha_factura;
     private String total;
 
-    public Factura(Date fecha_factura, String total) {
+    public Factura(String fecha_factura, String total) {
         this.fecha_factura = fecha_factura;
         this.total = total;
     }
 
+ 
     public Long getId_factura() {
         return id_factura;
     }
@@ -29,11 +25,11 @@ public class Factura {
         this.id_factura = id_factura;
     }
 
-    public Date getFecha_factura() {
+    public String getFecha_factura() {
         return fecha_factura;
     }
 
-    public void setFecha_factura(Date fecha_factura) {
+    public void setFecha_factura(String fecha_factura) {
         this.fecha_factura = fecha_factura;
     }
 
@@ -45,11 +41,5 @@ public class Factura {
         this.total = total;
     }
     
-    
-
-   
-  
- 
-   
 
 }

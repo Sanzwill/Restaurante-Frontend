@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -16,14 +17,17 @@ import java.util.List;
  *
  * @author hugo
  */
-@Named(value="detalleController")
+@Named(value = "detalleController")
 @ViewScoped
-public class DetalleController implements Serializable{
-         List<Detalle> lstDetalle = new ArrayList<>();
-      private Integer id_detalleorden;
-      private Integer id_orden;
-      private Integer id_plato;
-      private String cantidad;
+public class DetalleController implements Serializable {
+
+    List<Detalle> lstDetalle = new ArrayList<>();
+    private Integer id_detalleorden;
+    private Integer id_orden;
+    private Integer id_plato;
+    private String cantidad;
+    private Detalle deteEditando;
+    private boolean modoEdicion;
 
     public List<Detalle> getLstDetalle() {
         return lstDetalle;
@@ -64,15 +68,33 @@ public class DetalleController implements Serializable{
     public void setCantidad(String cantidad) {
         this.cantidad = cantidad;
     }
-     
-      public void callApi() {
-          SpringRestConsumer restConsumer = new SpringRestConsumer();
+
+    public Detalle getDeteEditando() {
+        return deteEditando;
+    }
+
+    public void setDeteEditando(Detalle deteEditando) {
+        this.deteEditando = deteEditando;
+    }
+
+    public boolean isModoEdicion() {
+        return modoEdicion;
+    }
+
+    public void setModoEdicion(boolean modoEdicion) {
+        this.modoEdicion = modoEdicion;
+    }
+
+    public void callApi() {
+        SpringRestConsumer restConsumer = new SpringRestConsumer();
         lstDetalle = restConsumer.consumeApiDetalle();
     }
-      public void limpiar() {
+
+    public void limpiar() {
         lstDetalle.clear();
     }
-  public void eliminardetalle(int id) {
+
+    public void eliminardetalle(int id) {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
         restConsumer.borraApiCliente(id);
         lstDetalle = restConsumer.consumeApiDetalle();
@@ -80,9 +102,25 @@ public class DetalleController implements Serializable{
 
     public void guardardetalle() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
-        Detalle detalle = new Detalle(this.cantidad );
+        Detalle detalle = new Detalle(this.cantidad);
         restConsumer.guardaApiDetalle(detalle);
         lstDetalle = restConsumer.consumeApiDetalle();
+        this.setCantidad("");
+    }
+
+    public void editardetalle(Integer id_detalleorden, String cantidad){
+        this.setId_detalleorden(id_detalleorden);
+        this.setCantidad(cantidad);
+        
+
+    }
+
+    public void Actualizarempleado() {
+        SpringRestConsumer restConsumer = new SpringRestConsumer();
+        String response = restConsumer.actualizardetalle(this.getId_detalleorden(), this.getCantidad());
+        this.callApi();
+          this.setCantidad(cantidad);
+        modoEdicion = false;
     }
 
 }

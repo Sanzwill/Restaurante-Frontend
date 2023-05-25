@@ -64,6 +64,8 @@
                        
                         <p:column headerText="Actions">
                             <p:commandButton value="Eliminar" actionListener="#{empleadosController.eliminar(empleado.id_empleado)}" process="@form" update="tblClientes" />
+                        <p:commandButton value="Editar" action="#{empleadosController.editarempleado(empleado.id_empleado, empleado.nombre, empleado.apellido, empleado.telefono, empleado.salario)}" update="tblClientes" />
+                       
                         </p:column>
                     </p:dataTable>
                 
@@ -73,6 +75,8 @@
                     <p:toolbarGroup>
                         <p:commandButton value="CONSULTAR" icon="pi pi-search" actionListener="#{empleadosController.callApi}" process="@form" update="tblClientes, growl" styleClass="mr-2"/>                        
                         <p:commandButton value="LIMPIAR" icon="pi pi-minus" actionListener="#{empleadosController.limpiar}" process="@form" update="tblClientes, growl" styleClass="ui-button-danger"/> 
+                     <p:commandButton value="Actualizar Cliente" action="#{empleadosController.Actualizarempleado}"  rendered="#{empleadosController.modoEdicion}" process="@form" update=":form:tblClientes :form:growl" />
+
                     </p:toolbarGroup>
                 </p:toolbar>    
                 

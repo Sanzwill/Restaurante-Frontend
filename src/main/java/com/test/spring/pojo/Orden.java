@@ -12,22 +12,13 @@ import java.util.Date;
  */
 public class Orden {
     private Integer idOrden;
-            private Date fechaHora;
+            private String fechaHora;
             private String nombre_plato;
 
-    public Orden(Date fechaHora, String nombre_plato)
-    {
+    public Orden(String fechaHora, String nombre_plato) {
         this.fechaHora = fechaHora;
         this.nombre_plato = nombre_plato;
     }
-
-    public Orden(Integer idOrden, Date fechaHora, String nombre_plato) {
-        this.idOrden = idOrden;
-        this.fechaHora = fechaHora;
-        this.nombre_plato = nombre_plato;
-    }
-    
-    
 
     public Integer getIdOrden() {
         return idOrden;
@@ -37,11 +28,11 @@ public class Orden {
         this.idOrden = idOrden;
     }
 
-    public Date getFechaHora() {
+    public String getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(Date fechaHora) {
+    public void setFechaHora(String fechaHora) {
         this.fechaHora = fechaHora;
     }
 
@@ -52,8 +43,6 @@ public class Orden {
     public void setNombre_plato(String nombre_plato) {
         this.nombre_plato = nombre_plato;
     }
-
-       
-                    
     
+
 }

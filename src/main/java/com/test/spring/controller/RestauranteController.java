@@ -24,8 +24,15 @@ public class RestauranteController implements Serializable {
     private String nombre;
     private String direccion;
     private String telefono;
+    private Restaurante restaEditando;
+    private boolean modoEdicion;
 
-    public RestauranteController() {
+    public List<Restaurante> getLstrestau() {
+        return lstrestau;
+    }
+
+    public void setLstrestau(List<Restaurante> lstrestau) {
+        this.lstrestau = lstrestau;
     }
 
     public Integer getId_restaurante() {
@@ -60,8 +67,20 @@ public class RestauranteController implements Serializable {
         this.telefono = telefono;
     }
 
-    public List<Restaurante> getLstrestau() {
-        return lstrestau;
+    public Restaurante getRestaEditando() {
+        return restaEditando;
+    }
+
+    public void setRestaEditando(Restaurante restaEditando) {
+        this.restaEditando = restaEditando;
+    }
+
+    public boolean isModoEdicion() {
+        return modoEdicion;
+    }
+
+    public void setModoEdicion(boolean modoEdicion) {
+        this.modoEdicion = modoEdicion;
     }
 
     public void callApi() {
@@ -82,6 +101,28 @@ public class RestauranteController implements Serializable {
         Restaurante res = new Restaurante(this.direccion,  this.telefono,this.nombre);
         restConsumer.guardaApiRestaurante(res);
         lstrestau = restConsumer.consumeApiRestaurante();
+        this.setDireccion("");
+        this.setNombre("");
+        this.setTelefono("");
+        
+    }
+     public void editarCliente(Integer id_restaurante, String nombre, String direccion, String telefono) {
+        modoEdicion = true;
+        this.setDireccion(direccion);
+        this.setNombre(nombre);
+        this.setId_restaurante(id_restaurante);
+        this.setTelefono(telefono);
+      
+    }
+
+    public void Actualizarrestautante() {
+        SpringRestConsumer restConsumer = new SpringRestConsumer();
+        String response = restConsumer.actualizarrestau(this.getId_restaurante(), this.getNombre(), this.getTelefono(), this.getDireccion());
+        this.callApi();
+       this.setDireccion("");
+        this.setNombre("");
+        this.setTelefono("");
+        modoEdicion = false;
     }
 }
 

@@ -22,9 +22,11 @@ import java.util.List;
 public class ReservacionController implements Serializable{
      List <reservacion> lstreser =new ArrayList<>();
    private Integer id_reservacion;
-    private Date fecha_hora;
+    private String fecha_hora;
     private String nombre_cliente;
     private String duracion;
+       private reservacion reserteEditando;
+    private boolean modoEdicion;
 
     public List<reservacion> getLstreser() {
         return lstreser;
@@ -42,11 +44,11 @@ public class ReservacionController implements Serializable{
         this.id_reservacion = id_reservacion;
     }
 
-    public Date getFecha_hora() {
+    public String getFecha_hora() {
         return fecha_hora;
     }
 
-    public void setFecha_hora(Date fecha_hora) {
+    public void setFecha_hora(String fecha_hora) {
         this.fecha_hora = fecha_hora;
     }
 
@@ -66,6 +68,21 @@ public class ReservacionController implements Serializable{
         this.duracion = duracion;
     }
 
+    public reservacion getReserteEditando() {
+        return reserteEditando;
+    }
+
+    public void setReserteEditando(reservacion reserteEditando) {
+        this.reserteEditando = reserteEditando;
+    }
+
+    public boolean isModoEdicion() {
+        return modoEdicion;
+    }
+
+    public void setModoEdicion(boolean modoEdicion) {
+        this.modoEdicion = modoEdicion;
+    }
 
    
  public void callApi() {
@@ -83,41 +100,37 @@ public class ReservacionController implements Serializable{
         lstreser= restConsumer.consumereserva();
     }
 
-//    public void guardaCategoria() {
-//        SpringRestConsumer restConsumer = new SpringRestConsumer();
-//        Categoria categoria = new Categoria(this.nombre);
-//        restConsumer.guardaCategoria(categoria);
-//        lstcatego = restConsumer.consumirApicategoria();
-//    }
-public void guardar() {
-    SpringRestConsumer restConsumer = new SpringRestConsumer();
-    
-    // Verificar si hay un ID eliminado disponible
-    Integer idDisponible = encontrarIdDisponible();
-    if (idDisponible != null) {
-        reservacion rese = new reservacion(this.nombre_cliente,this.duracion, this.fecha_hora );
-        restConsumer.guardarreserva(rese);
-    } else {
-        reservacion rese = new reservacion(this.duracion, this.nombre_cliente, this.fecha_hora);
-        restConsumer.guardarreserva(rese);
+public void guardarCliente() {
+        SpringRestConsumer restConsumer = new SpringRestConsumer();
+        reservacion reser = new reservacion(this.nombre_cliente, this.duracion,  this.fecha_hora);
+        restConsumer.guardarreserva(reser);
+        lstreser = restConsumer.consumereserva();
+        this.setNombre_cliente("");
+        this.setFecha_hora("");
+        this.setDuracion("");
+        
     }
-    
-    lstreser= restConsumer.consumereserva();
-}
 
-private Integer encontrarIdDisponible() {
-    Integer idDisponible = null;
-    
-    // Verificar si hay un ID eliminado en la lista de categorías
-    for (reservacion rese : lstreser) {
-        if (rese.getId_reservacion()== null) {
-            idDisponible = rese.getId_reservacion();
-            break;
-        }
+    public void editar(Integer id_reservacion, String duracion, String nombre_cliente, String fecha_hora) {
+        modoEdicion = true;
+        this.setId_reservacion(id_reservacion);
+        this.setDuracion(duracion);
+        this.setNombre_cliente(nombre_cliente);
+        this.setFecha_hora(fecha_hora);
+       
+
     }
-    
-    return idDisponible;
-}
+
+    public void ActualizarCliente() {
+        SpringRestConsumer restConsumer = new SpringRestConsumer();
+        String response = restConsumer.actualizarreserva(this.getId_reservacion(), this.getDuracion(), this.getNombre_cliente(), this.getFecha_hora());
+        this.callApi();
+        this.setDuracion("");
+        this.setFecha_hora("");
+        this.setNombre_cliente("");
+       
+        modoEdicion = false;
+    }
 
     
     

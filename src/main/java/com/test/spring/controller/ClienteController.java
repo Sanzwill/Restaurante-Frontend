@@ -16,25 +16,17 @@ import java.util.List;
  *
  * @author hugo
  */
-@Named(value="clienteController")
+@Named(value = "clienteController")
 @ViewScoped
-public class ClienteController implements Serializable{
-     List<Cliente> lstLista = new ArrayList<>();
-    private Integer id_cliente;
+public class ClienteController implements Serializable {
+
+    List<Cliente> lstLista = new ArrayList<>();
+    private Long id_cliente;
     private String nombres;
     private String telefono;
     private String Apellido;
-
-    public ClienteController() {
-    }
-
-    public String getApellido() {
-        return Apellido;
-    }
-
-    public void setApellido(String Apellido) {
-        this.Apellido = Apellido;
-    }
+    private Cliente clienteEditando;
+    private boolean modoEdicion;
 
     public List<Cliente> getLstLista() {
         return lstLista;
@@ -44,11 +36,11 @@ public class ClienteController implements Serializable{
         this.lstLista = lstLista;
     }
 
-    public Integer getId_cliente() {
+    public Long getId_cliente() {
         return id_cliente;
     }
 
-    public void setId_cliente(Integer id_cliente) {
+    public void setId_cliente(Long id_cliente) {
         this.id_cliente = id_cliente;
     }
 
@@ -67,32 +59,77 @@ public class ClienteController implements Serializable{
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-     public void callApi() {
+
+    public String getApellido() {
+        return Apellido;
+    }
+
+    public void setApellido(String Apellido) {
+        this.Apellido = Apellido;
+    }
+
+    public Cliente getClienteEditando() {
+        return clienteEditando;
+    }
+
+    public void setClienteEditando(Cliente clienteEditando) {
+        this.clienteEditando = clienteEditando;
+    }
+
+    public boolean isModoEdicion() {
+        return modoEdicion;
+    }
+
+    public void setModoEdicion(boolean modoEdicion) {
+        this.modoEdicion = modoEdicion;
+    }
+    
+    
+    
+    public void callApi() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
         lstLista = restConsumer.consumeApiCliente();
     }
-      public void limpiar() {
+
+    public void limpiar() {
         lstLista.clear();
     }
-  public void eliminar(int id) {
+
+    public void eliminar(int id) {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
         restConsumer.borraApiCliente(id);
         lstLista = restConsumer.consumeApiCliente();
     }
 
-    public void guardar() {
+    public void guardarCliente() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
-        Cliente cliente = new Cliente(this.nombres,  this.telefono, this.Apellido);
-        restConsumer.guardaApiCliente(cliente);
+        Cliente cliente = new Cliente(this.nombres, this.telefono, this.Apellido);
+        restConsumer.guardaApicliente(cliente);
         lstLista = restConsumer.consumeApiCliente();
+        this.setNombres("");
+        this.setApellido("");
+        this.setTelefono("");
+
     }
 
-public void actualizar(Cliente cliente) {
-    SpringRestConsumer restConsumer = new SpringRestConsumer();
-    restConsumer.actualizaApiCliente(cliente, cliente.getId_cliente());
-    lstLista = restConsumer.consumeApiCliente();
-}
+    public void editarCliente(Long id_cliente, String nombres, String apellido, String telefono) {
+        modoEdicion = true;
+        this.setId_cliente(id_cliente);
+        this.setNombres(nombres);
+        this.setApellido(apellido);
+        this.setTelefono(telefono);
+
+    }
+     public void Actualizarcliente() {
+        SpringRestConsumer restConsumer = new SpringRestConsumer();
+        String response = restConsumer.actualizarclientess(this.getId_cliente(),this.getNombres(),this.getApellido(),this.getTelefono());
+        this.callApi();
+        this.setApellido("");
+        this.setNombres("");
+        this.setTelefono("");
+
+        modoEdicion = false;
+    }
 
 
-    
 }

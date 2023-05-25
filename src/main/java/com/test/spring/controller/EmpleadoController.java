@@ -18,8 +18,15 @@ public class EmpleadoController implements Serializable {
     private String apellido;
     private String telefono;
     private String salario;
+      private Empleados EmpleadoEditando;
+    private boolean modoEdicion;
 
-    public EmpleadoController() {
+    public List<Empleados> getLstEmpledos() {
+        return lstEmpledos;
+    }
+
+    public void setLstEmpledos(List<Empleados> lstEmpledos) {
+        this.lstEmpledos = lstEmpledos;
     }
 
     public Integer getId_empleado() {
@@ -28,14 +35,6 @@ public class EmpleadoController implements Serializable {
 
     public void setId_empleado(Integer id_empleado) {
         this.id_empleado = id_empleado;
-    }
-
-    public List<Empleados> getLstEmpledos() {
-        return lstEmpledos;
-    }
-
-    public void setLstEmpledos(List<Empleados> lstEmpledos) {
-        this.lstEmpledos = lstEmpledos;
     }
 
     public String getNombre() {
@@ -70,6 +69,24 @@ public class EmpleadoController implements Serializable {
         this.salario = salario;
     }
 
+    public Empleados getEmpleadoEditando() {
+        return EmpleadoEditando;
+    }
+
+    public void setEmpleadoEditando(Empleados EmpleadoEditando) {
+        this.EmpleadoEditando = EmpleadoEditando;
+    }
+
+    public boolean isModoEdicion() {
+        return modoEdicion;
+    }
+
+    public void setModoEdicion(boolean modoEdicion) {
+        this.modoEdicion = modoEdicion;
+    }
+
+    
+
     public void callApi() {
         SpringRestConsumer restConsumer = new SpringRestConsumer();
         lstEmpledos = restConsumer.consumeApiEmpleados();
@@ -90,13 +107,35 @@ public class EmpleadoController implements Serializable {
         Empleados empleado = new Empleados(this.apellido, this.nombre, this.salario, this.telefono);
         restConsumer.guardaApiEmpleados(empleado);
         lstEmpledos = restConsumer.consumeApiEmpleados();
-        limpiarCampos();
+        this.setNombre("");
+        this.setApellido("");
+        this.setSalario("");
+        this.setTelefono("");
     }
 
-    private void limpiarCampos() {
-        nombre = null;
-        apellido = null;
-        telefono = null;
-        salario = null;
+   
+
+    public void editarempleado(Integer id_empleado, String nombre, String apellido, String telefono, String salario) {
+        this.modoEdicion = true;
+        this.setId_empleado(id_empleado);
+        this.setApellido(apellido);
+        this.setNombre(nombre);
+        this.setSalario(salario);
+        this.setTelefono(telefono);
+       
+       
+        
+    }
+
+    public void Actualizarempleado() {
+        SpringRestConsumer restConsumer = new SpringRestConsumer();
+        String response = restConsumer.actualizaEmpleado(this.getId_empleado(), this.getNombre(), this.getApellido(), this.getTelefono(),this.getSalario());
+        this.callApi();
+        this.setApellido("");
+        this.setNombre("");
+        this.setSalario("");
+        this.setTelefono("");
+
+        modoEdicion = false;
     }
 }
